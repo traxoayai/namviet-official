@@ -13,7 +13,7 @@ type User struct {
 	Phone              *string   `json:"phone,omitempty"`
 	WorkState          *string   `json:"work_state,omitempty"`
 	RoleID             *string   `json:"role_id,omitempty"`
-	CompanyID          *int64    `json:"company_id,omitempty"`
+	CompanyID          *string   `json:"company_id,omitempty"`
 	WarehouseID        *int64    `json:"warehouse_id,omitempty"`
 	CreatedAt          time.Time `json:"created_at"`
 	UpdatedAt          time.Time `json:"updated_at"`

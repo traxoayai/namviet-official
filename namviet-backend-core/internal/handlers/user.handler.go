@@ -39,7 +39,7 @@ func (h *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
 		FullName    string `json:"full_name"`
 		Phone       string `json:"phone"`
 		RoleID      string `json:"role_id"`
-		CompanyID   int64  `json:"company_id"`
+		CompanyID   string `json:"company_id"`
 		WarehouseID int64  `json:"warehouse_id"`
 	}
 
@@ -55,15 +55,30 @@ func (h *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var roleIDPtr *string
+	if payload.RoleID != "" {
+		roleIDPtr = &payload.RoleID
+	}
+
+	var companyIDPtr *string
+	if payload.CompanyID != "" {
+		companyIDPtr = &payload.CompanyID
+	}
+
+	var warehouseIDPtr *int64
+	if payload.WarehouseID != 0 {
+		warehouseIDPtr = &payload.WarehouseID
+	}
+
 	// 2. Create in public.users table
 	user := &models.User{
 		ID:          authID,
 		Email:       &payload.Email,
 		FullName:    &payload.FullName,
 		Phone:       &payload.Phone,
-		RoleID:      &payload.RoleID,
-		CompanyID:   &payload.CompanyID,
-		WarehouseID: &payload.WarehouseID,
+		RoleID:      roleIDPtr,
+		CompanyID:   companyIDPtr,
+		WarehouseID: warehouseIDPtr,
 		Status:      "active", // or pending_approval based on business logic
 	}
 

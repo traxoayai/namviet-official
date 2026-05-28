@@ -20,7 +20,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
-  permissions: [],
+  permissions: ['*'], // Tạm thời để '*' để thấy full menu trong lúc code
   isAuthenticated: false,
   setAuth: (user, permissions) => set({ user, permissions, isAuthenticated: true }),
   clearAuth: () => set({ user: null, permissions: [], isAuthenticated: false }),

@@ -20,7 +20,7 @@ func main() {
 	if err != nil {
 		// Thêm log chi tiết để biết nó đang tìm ở đâu
 		wd, _ := os.Getwd()
-		log.Fatalf("❌ Lỗi: Không thể tìm thấy file .env tại đường dẫn: %s", wd)
+		log.Printf("⚠️ Cảnh báo: Không tìm thấy file .env tại %s, sẽ dùng biến môi trường OS", wd)
 	}
 
 	// 2. LẤY CHÌA KHÓA KẾT NỐI

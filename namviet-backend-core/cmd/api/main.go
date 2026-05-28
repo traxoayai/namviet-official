@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	_ "github.com/jackc/pgx/v5/stdlib" // Bắt buộc phải có dấu "_" để tải driver ngầm
 	"github.com/joho/godotenv"
@@ -27,6 +28,15 @@ func main() {
 	database_url := os.Getenv("DATABASE_URL")
 	if database_url == "" {
 		log.Fatal("❌ Lỗi: Biến DATABASE_URL đang trống")
+	}
+
+	// [FIX] Tự động vô hiệu hóa Prepared Statements để tương thích với cổng Pooler 6543 của Supabase
+	if !strings.Contains(database_url, "default_query_exec_mode") {
+		if strings.Contains(database_url, "?") {
+			database_url += "&default_query_exec_mode=exec&statement_cache_capacity=0"
+		} else {
+			database_url += "?default_query_exec_mode=exec&statement_cache_capacity=0"
+		}
 	}
 
 	// 3. KHỞI TẠO ĐƯỜNG ỐNG KẾT NỐI (CONNECTION POOL)

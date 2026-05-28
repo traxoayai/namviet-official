@@ -1599,6 +1599,9 @@
 - **updated_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
 - **profile_updated_at**: timestamp with time zone (Nullable: YES)
 - **work_state**: text (Nullable: YES) DEFAULT 'working'::text
+- **role_id**: uuid (Nullable: YES)
+- **company_id**: bigint (Nullable: YES)
+- **warehouse_id**: bigint (Nullable: YES)
 
 ### Table: v_active_deals
 

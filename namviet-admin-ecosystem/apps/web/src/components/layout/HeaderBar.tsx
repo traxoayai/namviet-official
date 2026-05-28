@@ -7,9 +7,11 @@ import {
   MessageCircle, HelpCircle, MessageSquare
 } from 'lucide-react';
 
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { getPageTitleByHref } from '@/config/menu.config';
+
 interface HeaderBarProps {
-  activePage: string;
-  setActivePage: (page: string) => void;
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
   isProfileOpen: boolean;
@@ -21,37 +23,29 @@ interface HeaderBarProps {
 }
 
 export default function HeaderBar({
-  activePage, setActivePage,
   isDarkMode, setIsDarkMode,
   isProfileOpen, setIsProfileOpen,
   isChatOpen, setIsChatOpen,
   isSearchOpen, setIsSearchOpen
 }: HeaderBarProps) {
   
-  // Ánh xạ ID activePage ra tiêu đề
-  const getPageTitle = () => {
-    switch(activePage) {
-      case 'dashboard': return 'Dashboard';
-      case 'forum': return 'Diễn đàn & Thông báo';
-      case 'master_data': return 'Cấu hình Hệ thống';
-      default: return 'Trang tính năng';
-    }
-  };
+  const pathname = usePathname();
+  const pageTitle = getPageTitleByHref(pathname);
 
   return (
     <header className="hidden lg:flex sticky top-0 z-40 items-center justify-between h-14 px-5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] dark:shadow-none">
       <div className="flex items-center gap-4 flex-1">
         {/* Breadcrumb */}
         <div className="flex items-center text-sm font-medium text-slate-500 dark:text-slate-400">
-          <span 
+          <Link 
+            href="/dashboard"
             className="hover:text-slate-800 dark:hover:text-white cursor-pointer transition-colors"
-            onClick={() => setActivePage('dashboard')}
           >
             Trang chủ
-          </span>
+          </Link>
           <ChevronRight size={14} className="mx-1 text-slate-400" />
           <span className="text-slate-900 dark:text-white font-bold bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md shadow-sm text-[13px]">
-            {getPageTitle()}
+            {pageTitle}
           </span>
         </div>
       </div>
@@ -77,12 +71,12 @@ export default function HeaderBar({
 
         {/* Forum & Announcements Icon */}
         <div className="relative group flex items-center justify-center">
-          <button 
-            onClick={() => setActivePage('forum')}
-            className={`p-1.5 rounded-full transition-colors active:scale-95 ${activePage === 'forum' ? 'text-primary bg-primary-50 dark:bg-slate-800' : 'text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-slate-800'}`}
+          <Link 
+            href="/forum"
+            className={`p-1.5 rounded-full transition-colors active:scale-95 ${pathname === '/forum' ? 'text-primary bg-primary-50 dark:bg-slate-800' : 'text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-slate-800'}`}
           >
             <MessageSquare size={18} className="transition-colors" />
-          </button>
+          </Link>
           {/* Tooltip */}
           <div className="absolute top-full mt-3 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div className="bg-slate-800 dark:bg-slate-700 text-white text-xs font-medium px-3 py-2 rounded-lg shadow-xl whitespace-nowrap border border-slate-700 dark:border-slate-600">

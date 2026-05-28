@@ -75,6 +75,13 @@ func main() {
 	warehouseRepo := repositories.NewWarehouseRepository(db_connection)
 	warehouseHandler := handlers.NewWarehouseHandler(warehouseRepo)
 
+	roleRepo := repositories.NewRoleRepository(db_connection)
+	roleHandler := handlers.NewRoleHandler(roleRepo)
+
+	authService := services.NewAuthService()
+	userRepo := repositories.NewUserRepository(db_connection)
+	userHandler := handlers.NewUserHandler(userRepo, authService)
+
 	// 7. CẤU HÌNH ROUTER (HTTP SERVER)
 	mux := http.NewServeMux()
 
@@ -90,6 +97,14 @@ func main() {
 	mux.HandleFunc("POST /api/v1/warehouses", warehouseHandler.Create)
 	mux.HandleFunc("PUT /api/v1/warehouses/{id}", warehouseHandler.Update)
 	mux.HandleFunc("DELETE /api/v1/warehouses/{id}", warehouseHandler.Delete)
+
+	// API Roles
+	mux.HandleFunc("GET /api/v1/roles", roleHandler.GetAll)
+	mux.HandleFunc("POST /api/v1/roles", roleHandler.Create)
+
+	// API Users
+	mux.HandleFunc("GET /api/v1/users", userHandler.GetAll)
+	mux.HandleFunc("POST /api/v1/users", userHandler.Create)
 
 	// API Upload
 	mux.HandleFunc("POST /api/v1/upload", handlers.UploadImage)

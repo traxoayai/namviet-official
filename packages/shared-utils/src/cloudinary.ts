@@ -41,15 +41,11 @@ export function optimize_cloudinary_url(url: string | null | undefined): string 
  * @param backendUploadUrl URL của API Upload (Mặc định: http://localhost:8080/api/v1/upload)
  * @returns {Promise<string>} Đường dẫn secure_url trả về từ Cloudinary
  */
-export async function uploadToCloudinary(file: File, backendUploadUrl?: string): Promise<string> {
-  const defaultUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://namviet-official-150879831872.asia-southeast1.run.app/api/v1/upload'
-    : 'http://localhost:8080/api/v1/upload';
-  const urlToUse = backendUploadUrl || defaultUrl;
+export async function uploadToCloudinary(file: File, backendUploadUrl: string = 'http://localhost:8080/api/v1/upload'): Promise<string> {
   const formData = new FormData();
   formData.append('image', file);
 
-  const response = await fetch(urlToUse, {
+  const response = await fetch(backendUploadUrl, {
     method: 'POST',
     body: formData,
   });

@@ -1,5 +1,5 @@
 # Bước 1: Build Image (Tầng biên dịch)
-FROM golang:1.22-alpine AS builder
+FROM golang:1.26-alpine AS builder
 WORKDIR /app
 
 # Tải dependencies trước để tận dụng cache của Docker

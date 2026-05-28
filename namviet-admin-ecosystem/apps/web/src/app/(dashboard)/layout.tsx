@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import HeaderBar from '@/components/layout/HeaderBar';
 import MenuBar from '@/components/layout/MenuBar';
+import ChatbotSheet from '@/components/overlays/ChatbotSheet';
+import GlobalSearchModal from '@/components/overlays/GlobalSearchModal';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
@@ -48,6 +50,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </main>
         
       </div>
+      <ChatbotSheet isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 }

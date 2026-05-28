@@ -36,7 +36,7 @@ export function WarehouseForm({
     setValue,
     formState: { errors },
   } = useForm<WarehouseFormData>({
-    resolver: zodResolver(warehouseSchema),
+    resolver: zodResolver(warehouseSchema) as any,
     defaultValues: {
       company_id: "",
       key: "",

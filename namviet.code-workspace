@@ -1,0 +1,9 @@
+{
+  "folders": [
+    { "path": "namviet-infrastructure" },
+    { "path": "namviet-backend-core" },
+    { "path": "namviet-admin-ecosystem" },
+    { "path": "namviet-b2b-ecosystem" },
+    { "path": "namviet-b2c-ecosystem" }
+  ]
+}

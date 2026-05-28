@@ -1,0 +1,13 @@
+.git
+.gitignore
+.dockerignore
+.env
+.env.*
+node_modules
+.next
+dist
+build
+README.md
+docs/
+*.md
+firebase-adminsdk.json

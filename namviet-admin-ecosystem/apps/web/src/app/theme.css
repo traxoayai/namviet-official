@@ -1,0 +1,59 @@
+@theme {
+  /* Dược Nam Việt Primary Colors (Orange Focus) */
+  --color-primary-50: #fff7ed;
+  --color-primary-100: #ffedd5;
+  --color-primary-200: #fed7aa;
+  --color-primary-300: #fdba74;
+  --color-primary-400: #fb923c;
+  --color-primary-500: #f97316; /* Main Brand Color */
+  --color-primary-600: #ea580c;
+  --color-primary-700: #c2410c;
+  --color-primary-800: #9a3412;
+  --color-primary-900: #7c2d12;
+
+  /* We map standard Tailwind 'primary' to these colors */
+  --color-primary: var(--color-primary-500);
+
+  /* You can also define custom shadow or font families if needed */
+  --shadow-primary: 0 4px 14px 0 rgba(249, 115, 22, 0.39);
+}
+
+/* Global Layout & Theming Rules */
+@layer base {
+  :root {
+    --brand-primary: #f97316;
+    --brand-secondary: #0ea5e9;
+  }
+  
+  .dark {
+    --brand-primary: #fb923c;
+  }
+}
+
+/* Scrollbar Styling for a more app-like feel */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Utility to hide scrollbar completely but allow scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
